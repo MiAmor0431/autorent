@@ -1,5 +1,5 @@
 // src/api/api.js
-const API_URL = "http://192.168.1.3:3000/api";
+const API_URL = "http://192.168.0.16:3000/api";
 
 // Получить все машины
 export const getCars = async () => {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <nav className="navbar navbar-expand-lg navbar-black bg-dark shadow-sm">
             <div className="container">
                 <Link className="navbar-brand text-white fw-bold" to="/">
                     🚗 Автопрокат

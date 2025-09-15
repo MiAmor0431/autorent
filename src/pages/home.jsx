@@ -1,12 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import image from '../assets/main.jpg';
+import Catalog from "./catalog.jsx";
+
 
 function Home() {
     return (
         <div>
-            <h1>Авто прокат</h1>
-            <p>Лучшие автомобили для аренды в городе 🚗</p>
-            <Link to="/catalog">Посмотреть каталог</Link>
+            <div className="hero-section position-relative text-white">
+                <img src={image} alt="car" className="bg-image w-100 h-100"/>
+
+                {/* затемнение */}
+                <div className="overlay"></div>
+
+                {/* контент */}
+                <div className="content position-absolute top-50 start-50 translate-middle text-center">
+                    <h1 className="mb-3">Авто прокат</h1>
+                    <p className="mb-4">Лучшие автомобили для аренды в городе 🚗</p>
+                    <Link to="/catalog" className="btn btn-light">
+                        Посмотреть каталог
+                    </Link>
+                </div>
+
+            </div>
+            <Catalog />
         </div>
     );
 }

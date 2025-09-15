@@ -26,7 +26,7 @@ const Catalog = () => {
 
     return (
         <div className="container mt-4">
-            <h1 className="mb-4">Каталог машин</h1>
+            <h1 className="mb-4 text-white">Прокат автомобилей в Алматы</h1>
             <div className="row">
                 {cars.map((car) => (
                     <div className="col-md-4 mb-4" key={car._id}>

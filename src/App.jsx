@@ -14,8 +14,11 @@ import Footer from './components/footer';
 function App() {
     return (
         <>
-            <Navbar />
-            <main style={{ minHeight: "80vh", padding: "20px" }}>
+
+            <main style={{ minHeight: "80vh"  }} className="bg-black">
+
+                    <Navbar />
+
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/catalog" element={<Catalog />} />

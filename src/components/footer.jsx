@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
     return (
-        <footer className="bg-dark text-white py-4 mt-5">
+        <footer className="bg-black text-white py-4">
             <div className="container text-center">
                 <h5 className="fw-bold">🚗 Авто Прокат</h5>
                 <p>Лучшие автомобили для аренды в городе</p>
