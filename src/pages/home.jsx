@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import image from '../assets/main.jpg';
+import image from '../assets/hero-section.jpg';
 import Catalog from "./catalog.jsx";
+import Features from "./features.jsx";
+import HowItWorks from "./howItWorks.jsx";
 
 
 function Home() {
@@ -24,6 +26,8 @@ function Home() {
 
             </div>
             <Catalog />
+            <Features />
+            <HowItWorks />
         </div>
     );
 }
