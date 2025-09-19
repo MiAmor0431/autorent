@@ -30,3 +30,13 @@
 .content {
     z-index: 3;
 }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: black; /* <-- меняем белый на чёрный */
+    color: white; /* чтобы текст по умолчанию был виден */
+}
+
+
+

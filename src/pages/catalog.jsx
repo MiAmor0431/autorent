@@ -29,7 +29,7 @@ const Catalog = () => {
     }
 
     return (
-        <div className="container mt-4">
+        <div id="catalog" className="container mt-4">
             <h1 className="mb-4 text-white">Прокат автомобилей в Алматы</h1>
             <div className="row">
                 {cars.slice(0, visibleCount).map((car) => (

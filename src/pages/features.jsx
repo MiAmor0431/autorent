@@ -11,7 +11,7 @@ function Features() {
     ];
 
     return (
-        <section className="py-5 bg-black text-white">
+        <section id='terms' className="py-5 bg-black text-white">
             <Container>
                 <div className="text-center mb-5">
                     <h2 className="fw-bold">Почему выбирают нас?</h2>
