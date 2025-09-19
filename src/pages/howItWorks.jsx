@@ -7,7 +7,7 @@ function HowItWorks() {
         { number: 1, text: "Выберите авто", icon: <FaCar size={30} /> },
         { number: 2, text: "Забронируйте онлайн или по телефону", icon: <FaPhoneAlt size={30} /> },
         { number: 3, text: "Получите ключи в удобное время", icon: <FaKey size={30} /> },
-        { number: 4, text: "Наслаждайтесь поездкой 🚙", icon: <FaSmile size={30} /> },
+        { number: 4, text: "Наслаждайтесь поездкой", icon: <FaSmile size={30} /> },
     ];
 
     return (
