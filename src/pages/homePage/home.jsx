@@ -4,6 +4,7 @@ import Catalog from "../catalog.jsx";
 import Features from "../features.jsx";
 import HowItWorks from "../howItWorks.jsx";
 import "./module.homepage.css";
+import AboutUsSection from "../aboutUs/AboutUsSection.jsx";
 
 // Заголовок, который будет анимирован
 const heroTitle = "Премиум — это не цена, это отношение.";
@@ -68,7 +69,7 @@ function Home() {
                 </div>
 
             </div>
-
+            <AboutUsSection/>
             <Catalog/>
             <Features/>
             <HowItWorks/>

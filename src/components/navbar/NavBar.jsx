@@ -30,21 +30,28 @@ function Navbar() {
                     <li>
                         <a
                             className="nav-link"
-                            href="#top"
+                            href="#aboutUs"
                             onClick={(e) => {
                                 e.preventDefault();
                                 if (location.pathname !== "/") {
                                     navigate("/"); // возвращаемся на главную
                                     setTimeout(() => {
-                                        window.scrollTo({top: 0, behavior: "smooth"});
-                                    }, 100); // небольшой таймаут, чтобы подождать рендера
+                                        const aboutUs = document.getElementById("aboutUs");
+                                        if (aboutUs) {
+                                            aboutUs.scrollIntoView({behavior: "smooth"});
+                                        }
+                                    }, 200); // ждём пока отрендерится главная
                                 } else {
-                                    window.scrollTo({top: 0, behavior: "smooth"});
+                                    const aboutUs = document.getElementById("aboutUs");
+                                    if (aboutUs) {
+                                        aboutUs.scrollIntoView({behavior: "smooth"});
+                                    }
                                 }
                             }}
                         >
                             О нас
                         </a>
+
                     </li>
                     <li><Link className="nav-link" to="/catalog">Автопарк</Link></li>
                     <li><Link className="nav-link" to="/steps">Этапы</Link></li>
