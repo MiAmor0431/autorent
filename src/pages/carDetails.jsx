@@ -7,6 +7,8 @@ function CarDetails() {
     const { id } = useParams();
     const [car, setCar] = useState(null);
 
+
+
     useEffect(() => {
         getCarById(id).then(setCar);
     }, [id]);
@@ -15,6 +17,7 @@ function CarDetails() {
 
     return (
         <div>
+
             <h2>{car.name}</h2>
             <p>Класс: {car.class}</p>
             <p>Цена: {car.price} ₸/день</p>

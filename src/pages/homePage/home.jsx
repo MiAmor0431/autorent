@@ -69,8 +69,8 @@ function Home() {
                 </div>
 
             </div>
-            <AboutUsSection/>
             <Catalog/>
+            <AboutUsSection/>
             <Features/>
             <HowItWorks/>
         </div>
