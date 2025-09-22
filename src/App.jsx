@@ -9,7 +9,7 @@ import CarForm from './pages/admin/carForm';
 import Dashboard from './pages/admin/dashboard';
 import NotFound from './pages/notFound';
 import Navbar from './components/navbar/NavBar';
-import Footer from './components/footer';
+import Footer from './pages/footer/Footer.jsx';
 
 function App() {
     return (

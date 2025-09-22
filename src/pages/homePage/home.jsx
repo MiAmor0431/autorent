@@ -2,9 +2,11 @@ import { motion } from "framer-motion";
 import image from "../../assets/gemin.png";
 import Catalog from "../catalog.jsx";
 import Features from "../features.jsx";
-import HowItWorks from "../howItWorks.jsx";
 import "./module.homepage.css";
 import AboutUsSection from "../aboutUs/AboutUsSection.jsx";
+import BookingStages from "../bookingStage/BookingStages.jsx";
+import TermsSection from "../termsSection/TermsSection.jsx";
+import FaqSection from "../FaqSection/FaqSection.jsx";
 
 // Заголовок, который будет анимирован
 const heroTitle = "Премиум — это не цена, это отношение.";
@@ -72,7 +74,9 @@ function Home() {
             <Catalog/>
             <AboutUsSection/>
             <Features/>
-            <HowItWorks/>
+            <BookingStages/>
+            <TermsSection/>
+            <FaqSection/>
         </div>
     );
 }

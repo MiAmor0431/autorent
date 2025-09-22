@@ -54,9 +54,76 @@ function Navbar() {
 
                     </li>
                     <li><Link className="nav-link" to="/catalog">Автопарк</Link></li>
-                    <li><Link className="nav-link" to="/steps">Этапы</Link></li>
-                    <li><Link className="nav-link" to="/terms">Условия</Link></li>
-                    <li><Link className="nav-link" to="/faq">FAQ</Link></li>
+                    <li>
+                        <a
+                            className="nav-link"
+                            href="#bookingStages"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                if (location.pathname !== "/") {
+                                    navigate("/"); // если мы не на главной
+                                    setTimeout(() => {
+                                        const bookingStages = document.getElementById("bookingStages");
+                                        if (bookingStages) {
+                                            bookingStages.scrollIntoView({behavior: "smooth"});
+                                        }
+                                    }, 300);
+                                } else {
+                                    const bookingStages = document.getElementById("bookingStages");
+                                    if (bookingStages) {
+                                        bookingStages.scrollIntoView({behavior: "smooth"});
+                                    }
+                                }
+                            }}
+                        >
+                            Этапы
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            className="nav-link"
+                            href="#termSection"
+                            onClick={(e) => {
+                                e.preventDefault();
+
+                                if (location.pathname !== "/") {
+                                    navigate("/terms"); // идём на главную
+                                } else {
+                                    const termSection = document.getElementById("termSection");
+                                    if (termSection) {
+                                        termSection.scrollIntoView({behavior: "smooth"});
+                                    }
+                                }
+                            }}
+                        >
+                            Условия
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            className="nav-link"
+                            href="#faqSection"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                if (location.pathname !== "/") {
+                                    navigate("/"); // если мы не на главной
+                                    setTimeout(() => {
+                                        const bookingStages = document.getElementById("faqSection");
+                                        if (bookingStages) {
+                                            bookingStages.scrollIntoView({behavior: "smooth"});
+                                        }
+                                    }, 300);
+                                } else {
+                                    const bookingStages = document.getElementById("faqSection");
+                                    if (bookingStages) {
+                                        bookingStages.scrollIntoView({behavior: "smooth"});
+                                    }
+                                }
+                            }}
+                        >
+                            FAQ
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -73,11 +140,110 @@ function Navbar() {
             {isOpen && (
                 <div className="burger-menu">
                     <ul className="navbar-nav">
-                        <li><Link className="nav-link" to="/public" onClick={() => setIsOpen(false)}>О нас</Link></li>
-                        <li><Link className="nav-link" to="/catalog" onClick={() => setIsOpen(false)}>Автопарк</Link></li>
-                        <li><Link className="nav-link" to="/steps" onClick={() => setIsOpen(false)}>Этапы</Link></li>
-                        <li><Link className="nav-link" to="/terms" onClick={() => setIsOpen(false)}>Условия</Link></li>
-                        <li><Link className="nav-link" to="/faq" onClick={() => setIsOpen(false)}>FAQ</Link></li>
+                        <li>
+                            <a
+                                className="nav-link"
+                                href="#aboutUs"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setIsOpen(false);
+
+                                    if (location.pathname !== "/") {
+                                        navigate("/");
+                                        setTimeout(() => {
+                                            const aboutUs = document.getElementById("aboutUs");
+                                            if (aboutUs) {
+                                                aboutUs.scrollIntoView({behavior: "smooth"});
+                                            }
+                                        }, 200);
+                                    } else {
+                                        const aboutUs = document.getElementById("aboutUs");
+                                        if (aboutUs) {
+                                            aboutUs.scrollIntoView({behavior: "smooth"});
+                                        }
+                                    }
+                                }}
+                            >
+                                О нас
+                            </a>
+                        </li>
+                        <li><Link className="nav-link" to="/catalog" onClick={() => setIsOpen(false)}>Автопарк</Link>
+                        </li>
+                        <li>
+                            <a
+                                className="nav-link"
+                                href="#bookingStages"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setIsOpen(false);
+
+                                    if (location.pathname !== "/") {
+                                        navigate("/");
+                                        setTimeout(() => {
+                                            const bookingStages = document.getElementById("bookingStages");
+                                            if (bookingStages) {
+                                                bookingStages.scrollIntoView({behavior: "smooth"});
+                                            }
+                                        }, 300);
+                                    } else {
+                                        const bookingStages = document.getElementById("bookingStages");
+                                        if (bookingStages) {
+                                            bookingStages.scrollIntoView({behavior: "smooth"});
+                                        }
+                                    }
+                                }}
+                            >
+                                Этапы
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                className="nav-link"
+                                href="#termSection"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setIsOpen(false);
+
+                                    if (location.pathname !== "/") {
+                                        navigate("/terms");
+                                    } else {
+                                        const termSection = document.getElementById("termSection");
+                                        if (termSection) {
+                                            termSection.scrollIntoView({behavior: "smooth"});
+                                        }
+                                    }
+                                }}
+                            >
+                                Условия
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                className="nav-link"
+                                href="#faqSection"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setIsOpen(false);
+
+                                    if (location.pathname !== "/") {
+                                        navigate("/");
+                                        setTimeout(() => {
+                                            const faq = document.getElementById("faqSection");
+                                            if (faq) {
+                                                faq.scrollIntoView({behavior: "smooth"});
+                                            }
+                                        }, 300);
+                                    } else {
+                                        const faq = document.getElementById("faqSection");
+                                        if (faq) {
+                                            faq.scrollIntoView({behavior: "smooth"});
+                                        }
+                                    }
+                                }}
+                            >
+                                FAQ
+                            </a>
+                        </li>
                     </ul>
                 </div>
             )}

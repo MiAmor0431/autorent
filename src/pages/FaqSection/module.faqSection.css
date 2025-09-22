@@ -1,0 +1,73 @@
+.faq-section {
+    background-color: black;
+    color: white;
+    padding: 8rem 0;
+}
+
+.faq-section .container {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.faq-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.5rem, 2vw, 3.5rem);
+    line-height: 1.1;
+    text-transform: uppercase; /* Текст заголовка заглавными буквами */
+    letter-spacing: 0.05em; /* Небольшой межбуквенный интервал */
+    background: linear-gradient(to right, white 0%, #000 10%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 3rem;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.faq-item {
+    background: #000;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border-bottom: 0.1px solid dimgray;
+}
+
+.faq-item:hover {
+    /*background: #1a1a1a;*/
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 300;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+
+.faq-answer {
+    margin-top: 10px;
+    color: #bbb;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .faq-title {
+        display: block;
+        width: fit-content;   /* сжимает блок по ширине текста */
+        margin: 0 auto;       /* центрирует */
+        background: linear-gradient(to right, white 0%, #000 130%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
+}
+
