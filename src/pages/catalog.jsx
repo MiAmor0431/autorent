@@ -1,89 +1,52 @@
-import React, { useEffect, useState } from "react";
-import {
-    getCars,
-    getMarks,
-    getColor,
-    getBodywork,
-    getReleaseDate,
-    getClass,
-} from "../services/api";
-import CarCard from "../components/carCard";
-import MultiSelectField from "../components/multiSelectField";
+import React, { useEffect, useState, useMemo } from "react";
+import { getCars } from "../services/api";
+import { getUniqueValues, applyFilters } from "../utils/filterUtils";
+import CarCard from "../components/CarCard";
+import MultiSelectField from "../components/MultiSelectField";
 
 const Catalog = () => {
     const [cars, setCars] = useState([]);
-    const [filteredCars, setFilteredCars] = useState([]);
     const [loading, setLoading] = useState(true);
     const [visibleCount, setVisibleCount] = useState(6);
+    const [showFilters, setShowFilters] = useState(false);
 
-    // фильтры
-    const [marks, setMarks] = useState([]);
-    const [colors, setColors] = useState([]);
-    const [bodyworks, setBodyworks] = useState([]);
-    const [releaseDates, setReleaseDates] = useState([]);
-    const [classes, setClasses] = useState([]);
-    const [filter, setFilter] = useState(false);
-    const [filterClass, setFilterClass] = useState("btn btn-light");
-
-    // выбранные значения (массив объектов react-select)
-    const [selectedMark, setSelectedMark] = useState([]);
-    const [selectedColor, setSelectedColor] = useState([]);
-    const [selectedBodywork, setSelectedBodywork] = useState([]);
-    const [selectedReleaseDate, setSelectedReleaseDate] = useState([]);
-    const [selectedClass, setSelectedClass] = useState([]);
+    // выбранные фильтры
+    const [filters, setFilters] = useState({
+        mark: [],
+        color: [],
+        bodywork: [],
+        releaseDate: [],
+        class: [],
+    });
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getCars();
-                setCars(data);
-                setFilteredCars(data);
-
-                setMarks(await getMarks());
-                setColors(await getColor());
-                setBodyworks(await getBodywork());
-                setReleaseDates(await getReleaseDate());
-                setClasses(await getClass());
-            } catch (err) {
-                console.error("Ошибка загрузки:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
+        getCars().then((data) => {
+            setCars(data);
+            setLoading(false);
+        });
     }, []);
 
-    useEffect(() => {
-        let result = [...cars];
+    // уникальные значения для фильтров
+    const options = useMemo(() => ({
+        mark: getUniqueValues(cars, "mark", true),
+        color: getUniqueValues(cars, "color", true),
+        bodywork: getUniqueValues(cars, "bodywork", true),
+        releaseDate: getUniqueValues(cars, "releaseDate"),
+        class: getUniqueValues(cars, "class"),
+    }), [cars]);
 
-        if (selectedMark.length)
-            result = result.filter((c) =>
-                selectedMark.some((m) => m.value === c.mark?.name)
-            );
+    // применённые фильтры
+    const filteredCars = useMemo(() => applyFilters(cars, filters), [cars, filters]);
 
-        if (selectedColor.length)
-            result = result.filter((c) =>
-                selectedColor.some((col) => col.value === c.color?.name)
-            );
-
-        if (selectedBodywork.length)
-            result = result.filter((c) =>
-                selectedBodywork.some((b) => b.value === c.bodywork?.name)
-            );
-
-        if (selectedReleaseDate.length)
-            result = result.filter((c) =>
-                selectedReleaseDate.some((d) => d.value === String(c.releaseDate))
-            );
-
-        if (selectedClass.length)
-            result = result.filter((c) =>
-                selectedClass.some((cl) => cl.value === c.class)
-            );
-
-        setFilteredCars(result);
+    const handleFilterChange = ({ name, value }) => {
+        setFilters((prev) => ({ ...prev, [name]: value }));
         setVisibleCount(6);
-    }, [selectedMark, selectedColor, selectedBodywork, selectedReleaseDate, selectedClass, cars]);
+    };
+
+    const resetFilters = () => {
+        setFilters({ mark: [], color: [], bodywork: [], releaseDate: [], class: [] });
+        setVisibleCount(6);
+    };
 
     if (loading)
         return (
@@ -94,111 +57,44 @@ const Catalog = () => {
             </div>
         );
 
-    if (cars.length === 0)
-        return <p className="text-center mt-5">Нет доступных машин</p>;
-
-    const handleShowMore = () => {
-        setVisibleCount((prev) => prev + 6);
-    };
-
-    const handleFilter = () => {
-        setFilter(!filter);
-        setFilterClass(
-            !filter ? "btn btn-black border-light text-light" : "btn btn-light"
-        );
-    };
-
-    const handleEmpty = () => {
-        setSelectedMark([]);
-        setSelectedColor([]);
-        setSelectedBodywork([]);
-        setSelectedReleaseDate([]);
-        setSelectedClass([]);
-        setFilteredCars(cars);
-        setVisibleCount(6);
-    };
-
-    const handleFilterChange = ({ name, value }) => {
-        if (name === "mark") setSelectedMark(value);
-        if (name === "color") setSelectedColor(value);
-        if (name === "bodywork") setSelectedBodywork(value);
-        if (name === "releaseDate") setSelectedReleaseDate(value);
-        if (name === "class") setSelectedClass(value);
-    };
+    if (!cars.length) return <p className="text-center mt-5">Нет доступных машин</p>;
 
     return (
         <div id="catalog" className="container mt-4">
             <h1 className="mb-4 text-white">Прокат автомобилей в Алматы</h1>
 
-            {/* Кнопки фильтров */}
+            {/* Кнопки фильтрации */}
             <div className="mb-4 d-flex gap-2">
-                <button className={filterClass} onClick={handleFilter}>
-                    {filter ? "Скрыть фильтры" : "Показать фильтры"}
+                <button
+                    className={`btn ${showFilters ? "btn-dark" : "btn-light"}`}
+                    onClick={() => setShowFilters((prev) => !prev)}
+                >
+                    {showFilters ? "Скрыть фильтры" : "Показать фильтры"}
                 </button>
 
                 <button
-                    className="btn btn-black text-light border-0"
-                    onClick={handleEmpty}
-                    disabled={
-                        !selectedMark.length &&
-                        !selectedColor.length &&
-                        !selectedBodywork.length &&
-                        !selectedReleaseDate.length &&
-                        !selectedClass.length
-                    }
+                    className="btn btn-dark text-light border-0"
+                    onClick={resetFilters}
+                    disabled={Object.values(filters).every((arr) => !arr.length)}
                 >
                     ✕ Очистить фильтры
                 </button>
             </div>
 
-            {/* Фильтры */}
-            {filter && (
+            {/* Блок фильтров */}
+            {showFilters && (
                 <div className="row mb-4">
-                    <div className="col-md-2 text-black">
-                        <MultiSelectField
-                            name="mark"
-                            placeholder="Марка…"
-                            value={selectedMark}
-                            options={marks.map((m) => ({ value: m, label: m }))}
-                            onChange={handleFilterChange}
-                        />
-                    </div>
-                    <div className="col-md-2 text-black">
-                        <MultiSelectField
-                            name="color"
-                            placeholder="Цвет..."
-                            value={selectedColor}
-                            options={colors.map((c) => ({ value: c, label: c }))}
-                            onChange={handleFilterChange}
-                        />
-                    </div>
-                    <div className="col-md-2 text-black">
-                        <MultiSelectField
-                            name="bodywork"
-                            placeholder="Кузов..."
-                            value={selectedBodywork}
-                            options={bodyworks.map((b) => ({ value: b, label: b }))}
-                            onChange={handleFilterChange}
-                        />
-                    </div>
-                    <div className="col-md-2 text-black">
-                        <MultiSelectField
-                            name="releaseDate"
-                            placeholder="Год..."
-                            value={selectedReleaseDate}
-                            options={releaseDates.map((d) => ({ value: d, label: d }))}
-                            onChange={handleFilterChange}
-                        />
-                    </div>
-                    <div className="col-md-2 text-black">
-                        <MultiSelectField
-                            name="class"
-                            placeholder="Класс..."
-                            value={selectedClass}
-                            options={classes.map((cl) => ({ value: cl, label: cl }))}
-                            onChange={handleFilterChange}
-                        />
-                    </div>
+                    {Object.keys(filters).map((key) => (
+                        <div className="col-md-2 text-black" key={key}>
+                            <MultiSelectField
+                                name={key}
+                                placeholder={key + "..."}
+                                value={filters[key]}
+                                options={options[key].map((val) => ({ value: val, label: val }))}
+                                onChange={handleFilterChange}
+                            />
+                        </div>
+                    ))}
                 </div>
             )}
 
@@ -211,36 +107,17 @@ const Catalog = () => {
                 ))}
             </div>
 
-            {/* Кнопка "Показать больше" */}
+            {/* Показать ещё */}
             {visibleCount < filteredCars.length && (
                 <div className="text-center mt-3">
                     <button
                         className="px-4 border-0 bg-transparent"
-                        onClick={handleShowMore}
+                        onClick={() => setVisibleCount((v) => v + 6)}
                         style={{ color: "#fff", transition: "color 0.3s" }}
-                        onMouseEnter={(e) =>
-                            (e.currentTarget.style.color = "#adb5bd")
-                        }
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "#adb5bd")}
                         onMouseLeave={(e) => (e.currentTarget.style.color = "#fff")}
                     >
-                        Показать еще{" "}
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            className="bi bi-chevron-double-down"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                            />
-                            <path
-                                fillRule="evenodd"
-                                d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                            />
-                        </svg>
+                        Показать ещё ↓
                     </button>
                 </div>
             )}

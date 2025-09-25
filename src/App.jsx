@@ -10,6 +10,7 @@ import Dashboard from './pages/admin/dashboard';
 import NotFound from './pages/notFound';
 import Navbar from './components/navbar/NavBar';
 import Footer from './pages/footer/Footer.jsx';
+import TermsPage from "./pages/termsSection/TermsPage.jsx";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/catalog" element={<Catalog />} />
                     <Route path="/cars/:id" element={<CarDetails />} />
+                    <Route path="/terms" element={<TermsPage />} />
 
                     {/* Admin */}
                     <Route path="/admin/login" element={<Login />} />

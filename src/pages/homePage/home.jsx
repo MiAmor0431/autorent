@@ -49,6 +49,7 @@ function Home() {
                         <li><span className="dot"></span> Быстрое оформление</li>
                     </ul>
 
+
                     {/* 🔥 Новые карточки справа */}
                     <div className="extra-right">
                         <div className="extra-card">
