@@ -56,7 +56,7 @@ const CarCard = ({ car }) => {
 
             {/* Контент */}
             <div className="card-body d-flex flex-column">
-                <p className="card-text"> {car.class}</p>
+                <p className="card-text"> {car.class?.name}</p>
             </div>
             <div className="card-footer justify-content-between d-flex text">
                 <p className="card-text"><small className="text-body-light">{car.drive}</small></p>
