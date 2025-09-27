@@ -50,7 +50,7 @@ const CarCard = ({ car }) => {
 
                 {/* Бейдж с ценой */}
                 <span className="badge bg-white text-black position-absolute top-0 end-0 m-2 px-3 py-2 fs-6">
-            {car.pricePerDay.toLocaleString()} ₸ / день
+            {car.pricePerDay.toLocaleString("ru-RU")} ₸ / день
         </span>
             </div>
 

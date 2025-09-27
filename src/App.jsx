@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/homePage/home';
 import Catalog from './pages/catalog';
-import CarDetails from './pages/admin/car/carsList.jsx';
+import CarDetails from './pages/carDetails.jsx';
 import Login from './auth/login.jsx';
 import CarsList from './pages/admin/car/carsList.jsx';
 import CarForm from './pages/admin/car/carForm.jsx';
